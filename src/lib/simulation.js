@@ -7,7 +7,7 @@
 
 import { calculateMetrics, priorityWaitTimes, whatIfAnalysis } from './queue-engine';
 import { buildPrioritySplit, TRIAGE_LEVELS } from './triage';
-import { OPD_DEPARTMENTS, generatePatientQueue, generateBedData, getBedSummary, generateHourlyArrivals, generateAdmissionPipeline, MEDICINES, HOSPITAL } from './mock-data';
+import { OPD_DEPARTMENTS, generatePatientQueue, generateBedData, getBedSummary, generateHourlyArrivals, generateAdmissionPipeline, MEDICINES, HOSPITAL, CITY_HOSPITALS } from './mock-data';
 import { getMatrixCategory, getStockAlerts, daysUntilStockout } from './inventory-engine';
 
 /**
@@ -118,5 +118,53 @@ export function generateDashboardState() {
 
     // Triage reference
     triageLevels: TRIAGE_LEVELS,
+  };
+}
+
+/**
+ * Generate city-wide hospital availability stats based on a radius
+ */
+export function generateCityWideStats(radiusInKm) {
+  // In a real app, we'd use Haversine formula against user's actual GPS.
+  // Here we'll simulate by filtering hospitals randomly based on radius
+  // and giving them dynamic live stats.
+  
+  // Larger radius = more hospitals
+  const probability = Math.min(1.0, radiusInKm / 10);
+  
+  const nearbyHospitals = CITY_HOSPITALS.filter(h => Math.random() < probability || h.id === 'LNJP-001');
+  
+  const mapped = nearbyHospitals.map(h => {
+    // Generate random live metrics
+    const totalBeds = h.beds;
+    const occupiedPercent = 0.6 + (Math.random() * 0.35); // 60-95%
+    const bedsOccupied = Math.floor(totalBeds * occupiedPercent);
+    const bedsAvailable = totalBeds - bedsOccupied;
+    
+    const opdWait = Math.floor(15 + Math.random() * 45); // 15 to 60 mins
+    
+    // Fake distance for display
+    const distance = (Math.random() * radiusInKm).toFixed(1);
+    
+    return {
+      ...h,
+      distance,
+      bedsAvailable,
+      bedsTotal: totalBeds,
+      opdWaitTime: opdWait
+    };
+  });
+
+  // Sort by distance
+  mapped.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+
+  const totalAvailableBeds = mapped.reduce((sum, h) => sum + h.bedsAvailable, 0);
+  const avgWaitTime = Math.round(mapped.reduce((sum, h) => sum + h.opdWaitTime, 0) / Math.max(1, mapped.length));
+
+  return {
+    hospitals: mapped,
+    totalHospitals: mapped.length,
+    totalAvailableBeds,
+    avgWaitTime
   };
 }

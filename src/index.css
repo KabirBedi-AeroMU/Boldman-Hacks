@@ -1,0 +1,252 @@
+/* ── GIGW 3.0 Compliant Design System ── */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+  /* Indian Tricolor Palette */
+  --bg-primary: #f8f9fa;
+  --bg-card: #ffffff;
+  
+  --saffron: #FF9933;
+  --white: #FFFFFF;
+  --green: #138808;
+  --navy: #000080; /* Ashoka Chakra */
+  
+  --primary-theme: #000080; 
+  --secondary-theme: #000055;
+  --danger-red: #cc0000;
+  --success-green: #138808; 
+  --warning-orange: #FF9933; 
+  
+  --text-primary: #333333;
+  --text-secondary: #555555;
+  --text-inverse: #ffffff;
+  
+  --border: #e0e0e0;
+  --radius: 12px; /* Soft rounded corners per Arogya Setu */
+  --radius-sm: 6px;
+  
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(17, 124, 111, 0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Roboto', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 80px; 
+}
+
+/* Utility Bar (GIGW 3.0) */
+.utility-bar {
+  background: #222222;
+  color: #ffffff;
+  font-size: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 24px;
+}
+.utility-links {
+  display: flex;
+  gap: 12px;
+}
+.utility-links span { cursor: pointer; }
+.utility-links span:hover { text-decoration: underline; }
+
+/* Government Header */
+.gov-header {
+  background: #ffffff;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #FF9933 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #138808 66.6%) 1;
+}
+.gov-title-container {
+  display: flex;
+  flex-direction: column;
+}
+.gov-title-hi { font-weight: 700; color: var(--primary-theme); font-size: 1.1rem;}
+.gov-title-en { font-weight: 700; color: var(--primary-theme); font-size: 1.1rem; }
+
+/* Main Content */
+.main-content {
+  flex: 1;
+}
+
+/* Section Header */
+.section-header {
+  background: var(--navy);
+  color: white;
+  padding: 24px;
+  border-bottom: 4px solid transparent;
+  border-image: linear-gradient(to right, var(--saffron) 33.3%, var(--white) 33.3%, var(--white) 66.6%, var(--green) 66.6%) 1;
+}
+.section-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.section-header p {
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* Action Buttons */
+.primary-actions {
+  display: flex;
+  gap: 16px;
+  padding: 20px 24px;
+  background: #e8eaf6;
+  border-bottom: 1px solid var(--border);
+}
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.action-btn.navy { background: var(--navy); }
+.action-btn.navy:hover { background: var(--secondary-theme); }
+.action-btn.saffron { background: var(--saffron); color: #000; }
+.action-btn.saffron:hover { background: #e68a2e; }
+.action-btn.green { background: var(--green); }
+.action-btn.green:hover { background: #0f6a06; }
+.action-btn.red { background: var(--danger-red); }
+.action-btn.red:hover { background: #990000; }
+
+/* Stats Container */
+.stats-container {
+  padding: 24px;
+}
+.stats-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+.stats-header { margin-bottom: 16px; border-bottom: 2px solid var(--primary-theme); padding-bottom: 8px;}
+.stats-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--primary-theme);
+}
+.stats-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Radius Selector */
+.radius-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.radius-pill {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  background: #eeeeee;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.radius-pill.active {
+  background: var(--primary-theme);
+  color: white;
+  border-color: var(--primary-theme);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  text-align: center;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eeeeee;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.stat-icon { color: var(--primary-theme); }
+.stat-label { font-size: 0.75rem; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; }
+.stat-value { font-size: 1.25rem; font-weight: 700; color: var(--primary-theme); }
+.stat-value.positive { color: var(--success-green); }
+.stat-value.warning { color: var(--danger-red); }
+
+/* Hospital List */
+.hospital-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hospital-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+.hospital-info h4 { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); }
+.hospital-info p { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
+.hospital-metrics { text-align: right; }
+.hospital-metrics .metric { font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 2px;}
+.metric.green { color: var(--success-green); }
+.metric.red { color: var(--danger-red); }
+
+/* Bottom Nav */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: var(--bg-card);
+  border-top: 2px solid var(--primary-theme);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+}
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+.bottom-nav-item.active {
+  color: var(--primary-theme);
+}
+.bottom-nav-item.active svg {
+  color: var(--primary-theme);
+}
